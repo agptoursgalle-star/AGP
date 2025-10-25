@@ -18,54 +18,18 @@
   .btn:hover {background-color: #007aa1;}
   section {padding: 40px 20px; max-width: 1000px; margin: auto;}
   .services, .gallery {display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;}
-  .service-box, .gallery img {background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; width: 220px; text-align: center; transition: background-color 0.3s, color 0.3s;}
-  .gallery img {width: 220px; height: 140px; object-fit: cover;}
+  .service-box {background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; width: 220px; text-align: center; transition: background-color 0.3s, color 0.3s;}
   form {background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto; transition: background-color 0.3s, color 0.3s;}
   input, textarea {width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;}
   footer {background-color: #353166; color: white; text-align: center; padding: 15px; font-size: 14px; transition: background-color 0.3s, color 0.3s;}
 
-  /* Loader */
-  #loader {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 200;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-  #loader img {
-    width: 150px;
-    opacity: 0;
-    animation: logoFadeIn 1.5s ease forwards;
-  }
-  @keyframes logoFadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
-  }
+  #loader {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 1; transition: opacity 0.5s ease;}
+  #loader img {width: 150px; opacity: 0; animation: logoFadeIn 1.5s ease forwards;}
+  @keyframes logoFadeIn {from {opacity: 0; transform: scale(0.9);} to {opacity: 1; transform: scale(1);}}
 
-  /* Theme Toggle Button */
-  .theme-toggle {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
+  .theme-toggle {position: absolute; right: 20px; top: 20px; background: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
   .theme-toggle:hover {opacity: 0.8;}
 
-  /* Dark Mode Styles */
   body.dark {background-color: #1e1e2f; color: #f1f1f1;}
   body.dark header {background-color: #007aa1;}
   body.dark nav {background-color: #1b1b2a;}
@@ -74,44 +38,77 @@
   body.dark .btn {background-color: #1877f2;}
   body.dark .btn:hover {background-color: #145db2;}
 
-  /* Floating Buttons */
-  .float-container {position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; z-index: 100;}
+  /* Floating Buttons - improved */
+  .float-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    z-index: 100;
+  }
+
   .float-btn {
-    width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; color: white; box-shadow: 2px 2px 3px rgba(0,0,0,0.3); text-decoration: none; position: relative; animation: pulse 2s infinite;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    text-decoration: none;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .whatsapp-btn {background-color: #25d366;}
-  .facebook-btn {background-color: #1877f2;}
-  .float-btn:hover {opacity: 0.9;}
+
+  .float-btn img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+  }
+
+  .float-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  }
+
   .float-btn::after {
-    position: absolute; bottom: 70px; right: 0; background: #333; color: white; font-size: 12px; padding: 5px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; transform: translateY(5px); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    background: #333;
+    color: white;
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
   }
+
   .whatsapp-btn::after {content: 'Chat with us on WhatsApp';}
   .facebook-btn::after {content: 'Visit our Facebook Page';}
   .float-btn:hover::after {opacity: 1; transform: translateY(0);}
 
-  @keyframes pulse {
-    0% {box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);}
-    70% {box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);}
-    100% {box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);}
-  }
+  @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
 
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-
-  /* Responsive Adjustments */
+  /* Gallery */
+  .gallery {display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;}
+  .gallery img {width: 220px; height: 140px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
   @media (max-width: 600px) {
-    .float-btn {
-      width: 45px;
-      height: 45px;
-      font-size: 24px;
-    }
-    .float-btn::after {
-      display: none;
-    }
+    .gallery {flex-direction: column; align-items: center; gap: 15px;}
+    .gallery img {width: 90%; height: auto;}
+    .float-btn {width: 60px; height: 60px;}
+    .float-btn img {width: 36px; height: 36px;}
+    .float-btn::after {display: none;}
   }
 </style>
+
 <script>
   window.addEventListener('load', function() {
     const loader = document.getElementById('loader');
@@ -140,10 +137,9 @@
   }
 </script>
 </head>
+
 <body>
-  <div id="loader">
-    <img src="agplogo.png" alt="AGP TOURS Logo">
-  </div>
+  <div id="loader"><img src="agp-logo.png" alt="AGP TOURS Logo"></div>
 
   <header>
     <h1>AGP TOURS</h1>
@@ -173,22 +169,10 @@
   <section id="services">
     <h2>Our Services</h2>
     <div class="services">
-      <div class="service-box">
-        <h3>City Drives</h3>
-        <p>Ideal for short errands and local travel within your area.</p>
-      </div>
-      <div class="service-box">
-        <h3>Outstation Rides</h3>
-        <p>Comfortable long-distance trips anywhere in Sri Lanka.</p>
-      </div>
-      <div class="service-box">
-        <h3>Daily Office Drops</h3>
-        <p>Reliable daily rides for your office commutes.</p>
-      </div>
-      <div class="service-box">
-        <h3>Airport Transfers</h3>
-        <p>Quick and safe rides to and from Bandaranaike International Airport.</p>
-      </div>
+      <div class="service-box"><h3>City Drives</h3><p>Ideal for short errands and local travel within your area.</p></div>
+      <div class="service-box"><h3>Outstation Rides</h3><p>Comfortable long-distance trips anywhere in Sri Lanka.</p></div>
+      <div class="service-box"><h3>Daily Office Drops</h3><p>Reliable daily rides for your office commutes.</p></div>
+      <div class="service-box"><h3>Airport Transfers</h3><p>Quick and safe rides to and from Bandaranaike International Airport.</p></div>
     </div>
   </section>
 
@@ -212,7 +196,7 @@
       <label for="name">Your Name</label>
       <input type="text" id="name" name="name" required>
 
-      <label for="email">Email</label>
+      <label for="email">Your Email</label>
       <input type="email" id="email" name="email" required>
 
       <label for="message">Message</label>
@@ -223,8 +207,12 @@
   </section>
 
   <div class="float-container">
-    <a href="https://wa.me/94753975112?text=Hello%20AGP%20TOURS%2C%20I%20want%20to%20book%20a%20ride." class="float-btn whatsapp-btn" target="_blank">💬</a>
-    <a href="https://www.facebook.com/share/1BddHftwEx/" class="float-btn facebook-btn" target="_blank">📘</a>
+    <a href="https://wa.me/94753975112?text=Hello%20AGP%20TOURS%2C%20I%20want%20to%20book%20a%20ride." class="float-btn whatsapp-btn" target="_blank">
+      <img src="whatsapp.png" alt="WhatsApp">
+    </a>
+    <a href="https://www.facebook.com/share/1BddHftwEx/" class="float-btn facebook-btn" target="_blank">
+      <img src="facebook.png" alt="Facebook">
+    </a>
   </div>
 
   <footer>
