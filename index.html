@@ -7,29 +7,37 @@
 <style>
   html {scroll-behavior: smooth;}
   body {font-family: Arial, sans-serif; margin: 0; background-color: #f9f9f9; color: #333; opacity: 0; animation: fadeIn 1.2s ease forwards; transition: background-color 0.3s, color 0.3s;}
-  header {background-color: #0099cc; color: white; padding: 20px 10px; text-align: center; position: relative;}
+  header {background-color: #0099cc; color: white; padding: 15px 10px; display: flex; align-items: center; justify-content: center; position: relative; flex-wrap: wrap;}
+  header img {height: 60px; width: auto; margin-right: 10px; border-radius: 8px;}
+  header h1 {font-size: 28px; margin: 0;}
+  header p {width: 100%; text-align: center; margin: 5px 0 0 0; font-size: 16px;}
   nav {background-color: #353166; padding: 10px 0; text-align: center;}
   nav a {color: white; margin: 0 15px; text-decoration: none; font-weight: bold;}
   nav a:hover {text-decoration: underline;}
-  .hero {background-image: url('car-photo.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px;}
+  .hero {background-image: url('car-photo.jpg'); background-size: cover; background-position: center; color: white; text-align: center; padding: 100px 20px; position: relative;}
+  .hero::after {content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4);}
+  .hero h1, .hero p, .hero a {position: relative; z-index: 1;}
   .hero h1 {font-size: 36px; margin-bottom: 10px;}
   .hero p {font-size: 18px; margin-bottom: 20px;}
   .btn {background-color: #0099cc; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none;}
   .btn:hover {background-color: #007aa1;}
   section {padding: 40px 20px; max-width: 1000px; margin: auto;}
   .services, .gallery {display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;}
-  .service-box {background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; width: 220px; text-align: center; transition: background-color 0.3s, color 0.3s;}
-  form {background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto; transition: background-color 0.3s, color 0.3s;}
+  .service-box {background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 20px; width: 220px; text-align: center;}
+  form {background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 400px; margin: 20px auto;}
   input, textarea {width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;}
-  footer {background-color: #353166; color: white; text-align: center; padding: 15px; font-size: 14px; transition: background-color 0.3s, color 0.3s;}
+  footer {background-color: #353166; color: white; text-align: center; padding: 15px; font-size: 14px;}
 
+  /* Loader */
   #loader {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #fff; display: flex; align-items: center; justify-content: center; z-index: 200; opacity: 1; transition: opacity 0.5s ease;}
   #loader img {width: 150px; opacity: 0; animation: logoFadeIn 1.5s ease forwards;}
   @keyframes logoFadeIn {from {opacity: 0; transform: scale(0.9);} to {opacity: 1; transform: scale(1);}}
 
+  /* Theme toggle */
   .theme-toggle {position: absolute; right: 20px; top: 20px; background: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
   .theme-toggle:hover {opacity: 0.8;}
 
+  /* Dark mode */
   body.dark {background-color: #1e1e2f; color: #f1f1f1;}
   body.dark header {background-color: #007aa1;}
   body.dark nav {background-color: #1b1b2a;}
@@ -37,8 +45,9 @@
   body.dark .service-box, body.dark form {background-color: #2b2b3d; color: #f1f1f1;}
   body.dark .btn {background-color: #1877f2;}
   body.dark .btn:hover {background-color: #145db2;}
+  body.dark header img {border: 2px solid #f1f1f1;}
 
-  /* Floating Buttons - improved */
+  /* Floating buttons */
   .float-container {
     position: fixed;
     bottom: 20px;
@@ -49,7 +58,6 @@
     gap: 12px;
     z-index: 100;
   }
-
   .float-btn {
     width: 70px;
     height: 70px;
@@ -57,55 +65,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: #f1f1f1;
     text-decoration: none;
-    position: relative;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-
-  .float-btn img {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-  }
-
-  .float-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-  }
-
-  .float-btn::after {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    background: #333;
-    color: white;
-    font-size: 12px;
-    padding: 5px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0;
-    transform: translateY(5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-  }
-
-  .whatsapp-btn::after {content: 'Chat with us on WhatsApp';}
-  .facebook-btn::after {content: 'Visit our Facebook Page';}
-  .float-btn:hover::after {opacity: 1; transform: translateY(0);}
+  .float-btn img {width: 42px; height: 42px; border-radius: 50%;}
+  .float-btn:hover {transform: scale(1.1);}
+  body.dark .float-btn {background: #2d2d3a;}
 
   @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
 
   /* Gallery */
-  .gallery {display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;}
   .gallery img {width: 220px; height: 140px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
   @media (max-width: 600px) {
+    header img {height: 45px;}
+    header h1 {font-size: 22px;}
     .gallery {flex-direction: column; align-items: center; gap: 15px;}
     .gallery img {width: 90%; height: auto;}
     .float-btn {width: 60px; height: 60px;}
     .float-btn img {width: 36px; height: 36px;}
-    .float-btn::after {display: none;}
   }
 </style>
 
@@ -139,11 +118,14 @@
 </head>
 
 <body>
-  <div id="loader"><img src="agp-logo.png" alt="AGP TOURS Logo"></div>
+  <div id="loader"><img src="agplogo.png" alt="AGP TOURS Logo"></div>
 
   <header>
-    <h1>AGP TOURS</h1>
-    <p>Affordable. Comfy. Fuel Efficient.</p>
+    <img src="agp-logo.png" alt="AGP TOURS Logo">
+    <div>
+      <h1>AGP TOURS</h1>
+      <p>Affordable. Comfy. Fuel Efficient.</p>
+    </div>
     <button id="themeIcon" class="theme-toggle" onclick="toggleTheme()">🌞</button>
   </header>
 
@@ -189,8 +171,24 @@
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Ready to book your next ride? Contact us through WhatsApp, call us, or send a message below.</p>
-    <p><strong>Phone:</strong> +94 75 397 5112</p>
-    <p><strong>WhatsApp:</strong> <a href="https://wa.me/94753975112" target="_blank">Message Us</a></p>
+
+    <p><strong>Phone:</strong>
+      <a href="tel:+94753975112" style="text-decoration:none; color:#0099cc; font-weight:bold; display:inline-flex; align-items:center; gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#0099cc">
+          <path d="M6.62 10.79a15.093 15.093 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1v3.49a1 1 0 01-1 1C10.3 22 2 13.7 2 3.99a1 1 0 011-1H6.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.21z"/>
+        </svg>
+        +94 75 397 5112
+      </a>
+    </p>
+
+    <p><strong>WhatsApp:</strong>
+      <a href="https://wa.me/94753975112" target="_blank" style="text-decoration:none; color:#25d366; font-weight:bold; display:inline-flex; align-items:center; gap:8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="#25d366">
+          <path d="M19.11 17.08c-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.62.13-.18.27-.71.88-.87 1.06-.16.18-.32.2-.59.07-.27-.13-1.13-.42-2.16-1.35-.8-.71-1.34-1.58-1.5-1.85-.16-.27-.02-.42.11-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.35-.02-.48-.07-.13-.62-1.49-.85-2.04-.22-.53-.45-.46-.62-.46h-.53c-.18 0-.48.07-.73.35s-.96.94-.96 2.29 1 2.66 1.14 2.85c.14.18 1.97 3 4.78 4.2.67.29 1.19.46 1.6.59.67.21 1.28.18 1.76.11.54-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.31zM16.02 4C9.95 4 5 8.95 5 15.02c0 1.94.51 3.78 1.39 5.37L5 27l6.77-1.77c1.53.84 3.28 1.31 5.15 1.31 6.07 0 11.02-4.95 11.02-11.02C28 8.95 22.09 4 16.02 4zm0 20.1c-1.77 0-3.42-.52-4.8-1.41l-.34-.21-4.02 1.05 1.08-3.92-.22-.36c-.86-1.39-1.36-3.02-1.36-4.85 0-5 4.05-9.06 9.06-9.06s9.06 4.06 9.06 9.06-4.06 9.06-9.06 9.06z"/>
+        </svg>
+        Message Us
+      </a>
+    </p>
 
     <form onsubmit="showSuccessMessage(event)">
       <label for="name">Your Name</label>
